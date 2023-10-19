@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Home page{% endblock %}
+{% block navbar %} Welcome to the chating app {% endblock %}
+{% block sidebar %}
+			<ul>
+	            <li><a href="{% url 'home' %}">Home</a></li>
+	            <li><a href="{% url 'editprofile' %}">Edit_profile</a></li>
+	            <li><a href="{% url 'logout' %}">Log out</a></li>
+	        </ul>
+{% endblock %}
+
+{% block content %}
+{% for message in message_data %}
+
+        <div class="chat-messages">
+            {% if message.sender == user %}
+            <div class="message received">
+                <div style="display: flex;">
+                <img class="avatar" src="{{message.sender.profile.profile_picture.url}}" alt="User Avatar" height="50px">
+                <h3 class="user-name">{{message.sender.first_name}} <space>{{message.sender.last_name}} <span style="margin-left:200px; font-size: 14px; ">{{message.timestamp}}</span></h3>
+                </div>
+                <p>{{ message.content }}</p>
+            </div>
+            {% else %}
+                <p></p>
+            {% endif %}
+            <div class="message sent">
+                
+                 <div style="display: flex;">
+                <img class="avatar" src="{{message.receiver.profile.profile_picture.url}}" alt="User Avatar" height="50px">
+                <h3 class="user-name">{{message.receiver.first_name}} <space>{{message.receiver.last_name}} <span style="margin-left:200px; font-size: 14px; ">{{message.timestamp}}</span></h3>
+                </div>
+                <p>{{ message.content }}</p>
+                
+            </div>
+            
+        </div>
+    <!-- </div> -->
+    
+{% endfor %}
+        <div class="chat-input">
+            <input type="text" placeholder="Type a message...">
+            <button>Send</button>
+        </div>
+
+{% endblock %}

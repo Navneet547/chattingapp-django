@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input[type="file"],
+        textarea,
+        input[type="text"] {
+            width: 100%;
+            /*padding: 10px;*/
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            /*height: 0px;*/
+        }
+
+        button[type="button"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .category{
+            width: 80%;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        /* Style for the options within the select element */
+        select option {
+            font-size: 16px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Profile</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="bio">Bio:</label>
+        <textarea name="bio" id="bio" rows="4" cols="50" >{{ user_profile.bio }}</textarea>
+        
+
+        <label for="profile_picture">profile picture:</label>
+        <input type="file" name="profile_picture" id="profile_picture" accept="profile_picture/*">
+        
+        <label for="location">Location:</label>
+        <input type="text" name="location" style="height: 30px;" value="{{ user_profile.location }}">        
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>
